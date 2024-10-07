@@ -2,15 +2,14 @@ package com.example.personprofileregistration
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.personprofileregistration.adapter.ProfileAdapter
+import com.example.personprofileregistration.model.UserProfile
 import com.example.personprofileregistration.viewmodel.UserProfileViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -39,7 +38,7 @@ class ProfileListActivity : AppCompatActivity() {
         })
 
         profileAdapter.setOnItemClickListener {
-            val intent = Intent(this@ProfileListActivity, SingleProfileActivity::class.java)
+            val intent = Intent(this@ProfileListActivity, ProfileDetailActivity::class.java)
             intent.putExtra("USER_PROFILE", it)
             startActivity(intent)
         }
@@ -58,5 +57,27 @@ class ProfileListActivity : AppCompatActivity() {
             val intent = Intent(this@ProfileListActivity, AddProfileActivity::class.java)
             startActivity(intent)
         }
+    }
+    private fun showDeleteConfirmationDialog(userProfile: UserProfile) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Delete Profile")
+        builder.setMessage("Are you sure you want to delete this profile?")
+
+        builder.setPositiveButton("Yes") { dialog, which ->
+            profileViewModel.deleteUserProfile(userProfile)  // Delete the profile
+            dialog.dismiss()
+        }
+
+        builder.setNegativeButton("No") { dialog, which ->
+            dialog.dismiss()  // Cancel delete operation
+        }
+        
+        val dialog = builder.create()
+        dialog.show()
+
+        // Comment out or remove the LoadingActivity part
+        // val intent = Intent(this, LoadingActivity::class.java)
+        // intent.putExtra("TARGET_ACTIVITY", "com.example.userprofileregistration.ProfileActivity")
+        // startActivity(intent)
     }
 }

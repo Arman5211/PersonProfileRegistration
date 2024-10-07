@@ -2,14 +2,11 @@ package com.example.personprofileregistration
 
 import android.os.Bundle
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.personprofileregistration.model.UserProfile
 
 
-class SingleProfileActivity : AppCompatActivity() {
+class ProfileDetailActivity : AppCompatActivity() {
     private lateinit var userProfile: UserProfile
     private lateinit var nameText: TextView
     private lateinit var emailText: TextView
@@ -18,7 +15,7 @@ class SingleProfileActivity : AppCompatActivity() {
     private lateinit var mobileText: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_single_profile)
+        setContentView(R.layout.profile_detail)
         userProfile = intent.getSerializableExtra("USER_PROFILE") as UserProfile
 
         nameText = findViewById(R.id.nameTextView)
