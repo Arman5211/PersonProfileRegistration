@@ -18,7 +18,7 @@ class LoadingActivity : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed({
 
-            val tergetActivityName = intent.getStringExtra("Target_ACTIVITY")
+            val tergetActivityName = intent.getStringExtra("TARGET_ACTIVITY")
             val userProfile = intent.getSerializableExtra("USER_PROFILE") as UserProfile?
 
             val targetIntent = Intent()
